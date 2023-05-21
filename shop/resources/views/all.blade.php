@@ -12,14 +12,18 @@
         @include('navbar')
     </header>
     <h1>All</h1>
-    @foreach($data as $shoe)
-        <a href="/show/{{ $shoe['id'] }}">
-            <div>
-                <h2>{{$shoe['name']}}</h2>
-                <h2>{{$shoe['price']}}</h2>
-                <h2>{{$shoe['brand']}}</h2>
-            </div>
-        </a>
-    @endforeach
+    <div class="container">
+        <div class="row">
+            @foreach($data as $key => $shoe)
+                <a href="/show/{{ $shoe['id'] }}">
+                    <div>
+                        <h3>{{$shoe->name}}</h3>
+                        <h3>{{'$ '.$shoe->price}}</h3>
+                        <h3>{{$brands[$key]}}</h3>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </div>
 </body>
 </html>

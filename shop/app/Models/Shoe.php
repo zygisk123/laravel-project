@@ -9,4 +9,9 @@ class Shoe extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function getBrand()
+    {
+        return $this->hasOne(Brand::class, 'id', 'brand_id');
+    }
 }

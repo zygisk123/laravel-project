@@ -5,15 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Shoe;
+use App\Models\Brand;
 
 class ShoeController extends Controller
 {
     function showAll()
     {
         $data = Shoe::all();
-        echo $data;
-        
-        return view('all', compact('data'));
+        $brands = array();
+        foreach ($data as $shoe) {
+            $id = $shoe->id;
+            $brand = Shoe::find($id)->getBrand;
+            $brands[] = $brand->name;
+        }
+
+        return view('all', compact('brands', 'data'));
     }
 
     function addShoe(Request $req)
@@ -32,10 +38,11 @@ class ShoeController extends Controller
         $currentUrl = $req->url();
         $shoeId = $req->route('id');
         $shoe = Shoe::find($shoeId);
+        $brand = $shoe->getBrand;
         if (Str::contains($currentUrl, 'show')) {
-            return view('show', compact('shoe'));
+            return view('show', compact('shoe', 'brand'));
         } else {
-            return view('edit', compact('shoe'));
+            return view('edit', compact('shoe', 'brand'));
         }
     }
 
@@ -53,10 +60,11 @@ class ShoeController extends Controller
         echo $req->shoesName;
         // die;
         $shoeId = $req->route('id');
+        $brandID = Brand::where('name', $req->shoesBrand)->first()->id;
         $shoe = Shoe::find($shoeId);
         $shoe->name = $req->shoesName;
         $shoe->price = $req->shoesPrice;
-        $shoe->brand = $req->shoesBrand;
+        $shoe->brand_id = $brandID;
         $shoe->save();
         return redirect('all');
     }
