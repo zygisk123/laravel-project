@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShoeController;
+use App\Http\Controllers\BrandController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,7 @@ use App\Http\Controllers\ShoeController;
 // });
 
 Route::view('/','home');
-Route::view('/add','add');
+Route::get('/add',[BrandController::class, 'getAllBrands']);
 Route::post('add', [ShoeController::class, 'addShoe']);
 Route::get('/all',[ShoeController::class, 'showAll']);
 Route::get('/show/{id}',[ShoeController::class, 'showShoe']);

@@ -27,7 +27,7 @@ class ShoeController extends Controller
         $shoe = new Shoe;
         $shoe->name = $req->shoesName;
         $shoe->price = $req->shoesPrice;
-        $shoe->brand = $req->shoesBrand;
+        $shoe->brand_id = $req->shoesBrand;
         $shoe->save();
 
         return redirect('all');
@@ -38,11 +38,12 @@ class ShoeController extends Controller
         $currentUrl = $req->url();
         $shoeId = $req->route('id');
         $shoe = Shoe::find($shoeId);
-        $brand = $shoe->getBrand;
+        $selectedBrand = $shoe->getBrand;
         if (Str::contains($currentUrl, 'show')) {
-            return view('show', compact('shoe', 'brand'));
+            return view('show', compact('shoe', 'selectedBrand'));
         } else {
-            return view('edit', compact('shoe', 'brand'));
+            $brands = Brand::all();
+            return view('edit', compact('shoe', 'selectedBrand', 'brands'));
         }
     }
 
@@ -60,11 +61,10 @@ class ShoeController extends Controller
         echo $req->shoesName;
         // die;
         $shoeId = $req->route('id');
-        $brandID = Brand::where('name', $req->shoesBrand)->first()->id;
         $shoe = Shoe::find($shoeId);
         $shoe->name = $req->shoesName;
         $shoe->price = $req->shoesPrice;
-        $shoe->brand_id = $brandID;
+        $shoe->brand_id = $req->shoesBrand;
         $shoe->save();
         return redirect('all');
     }

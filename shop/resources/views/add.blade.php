@@ -27,8 +27,12 @@
                         <input type="number" class="form-control" id="formShoesPrice" name='shoesPrice'>
                     </div>
                     <div class="mb-3">
-                        <label for="formShoesBrand" class="form-label">Shoes Brand</label>
-                        <input type="text" class="form-control" id="formShoesBrand" name='shoesBrand'>
+                    <select class="form-select" aria-label="Default select example" name='shoesBrand'>
+                        <option selected>Select brand</option>
+                        @foreach($brands as $brand)
+                            <option value="{{$brand->id}}">{{$brand->name}}</option>
+                        @endforeach
+                    </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

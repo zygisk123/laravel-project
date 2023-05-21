@@ -18,7 +18,7 @@
                 <h1>Show</h1>
                 <h1>{{$shoe->name}}</h1>
                 <h3>Price: {{'$ ' . $shoe->price}}</h3>
-                <h3>Brand: {{$brand->name}}</h3>
+                <h3>Brand: {{$selectedBrand->name}}</h3>
                 <div class="row">
                     <div class="col-2">
                         <form action="/edit/{{$shoe->id}}" method="get">
