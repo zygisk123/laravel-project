@@ -15,13 +15,13 @@
     <div class="container">
         <div class="row">
             @foreach($data as $key => $shoe)
-                <a href="/show/{{ $shoe['id'] }}">
-                    <div>
+                <div class="item d-inline col-3 mt-3 mb-3">
+                    <a href="/show/{{ $shoe['id'] }}">
                         <h3>{{$shoe->name}}</h3>
                         <h3>{{'$ '.$shoe->price}}</h3>
                         <h3>{{$brands[$key]}}</h3>
-                    </div>
-                </a>
+                    </a>
+                </div>
             @endforeach
         </div>
     </div>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShoeController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ORMController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +26,5 @@ Route::get('/all',[ShoeController::class, 'showAll']);
 Route::get('/show/{id}',[ShoeController::class, 'showShoe']);
 Route::get('/delete', [ShoeController::class, 'deleteShoe']);
 Route::get('/edit/{id}', [ShoeController::class, 'showShoe']);
+Route::get('/orm', [ORMController::class, 'ormRel']);
 Route::post('/edited/{id}', [ShoeController::class, 'updateShoe']);
-
-// Route::view('/show/id','show');
-// Route::view('/edit/id','edit');
